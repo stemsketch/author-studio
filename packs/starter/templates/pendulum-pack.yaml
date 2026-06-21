@@ -1,0 +1,25 @@
+# Pendulum starter — ScenarioSpec v1
+id: pendulum-pack
+label: Simple pendulum
+domain: physics
+viewId: physics.pendulum-2d
+figureId: physics.pendulum.figure
+topicPath: mechanics/pendulum
+description: Starter pendulum scenario for author-studio
+scenario:
+  initialEntities:
+    - id: p1
+      type: Pendulum
+      attributes:
+        length:
+          value: 1.2
+          min: 0.5
+          max: 3.0
+          label: Length (m)
+        angleDeg:
+          value: 30
+          min: 0
+          max: 90
+          label: Release angle (deg)
+  presentation:
+    durationMs: 3000

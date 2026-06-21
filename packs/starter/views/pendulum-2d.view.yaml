@@ -1,0 +1,6 @@
+id: physics.pendulum-2d
+representation: pendulum
+renderTarget: svg-2d
+projector: generic/figure-tree-2d
+figureId: physics.pendulum.figure
+semanticLayout: physics.pendulum.layout

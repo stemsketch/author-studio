@@ -1,0 +1,11 @@
+{
+  "stemsketch.edition": "enterprise",
+  "stemsketch.authorApiBase": "http://127.0.0.1:4010",
+  "stemsketch.requireOnline": true,
+  "stemsketch.packRoot": "${workspaceFolder}/packs/starter",
+  "stemsketch.validateOnSave": false,
+  "files.associations": {
+    "*.view.yaml": "yaml",
+    "*.semfig.yaml": "yaml"
+  }
+}

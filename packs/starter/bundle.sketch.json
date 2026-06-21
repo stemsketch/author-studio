@@ -1,0 +1,16 @@
+{
+  "kind": "contribution",
+  "contribution_id": "physics.starter",
+  "namespace": "physics",
+  "version": "0.1.0",
+  "description": "Minimal starter pack for author-studio onboarding",
+  "artifacts": {
+    "ontology": ["pendulum.yaml"],
+    "ops": ["init-pendulum.yaml"],
+    "golden": ["pendulum-basic.yaml"],
+    "figures": ["pendulum.semfig.yaml"],
+    "layouts": ["pendulum-layout.yaml"],
+    "views": ["pendulum-2d.view.yaml"],
+    "templates": ["pendulum-pack.yaml"]
+  }
+}

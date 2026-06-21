@@ -1,0 +1,25 @@
+name: Author Studio CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  validate-structure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check starter pack layout
+        run: |
+          test -f packs/starter/manifest.yaml
+          test -f packs/starter/bundle.sketch.json
+          test -f .vscode/settings.json
+          test -f .stemsketch/config.yaml
+          test -f AGENTS.md
+
+      - name: Validate JSON manifests
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('packs/starter/bundle.sketch.json'))"
+          node -e "JSON.parse(require('fs').readFileSync('.vscode/settings.json'))"

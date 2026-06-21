@@ -1,0 +1,14 @@
+id: Pendulum
+description: Simple pendulum system
+specializes:
+  qualifiedName: STEM::System
+  catalogPin:
+    contributionId: stem.core
+    version: "1.0.0"
+fieldSpecs:
+  length:
+    type: number
+    default: 1
+  angleDeg:
+    type: number
+    default: 30

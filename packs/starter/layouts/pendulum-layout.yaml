@@ -1,0 +1,9 @@
+id: physics.pendulum.layout
+domain: physics
+regions:
+  - id: main
+    semanticIds: [Pendulum]
+    x: 0
+    y: 0
+    width: 1920
+    height: 1080

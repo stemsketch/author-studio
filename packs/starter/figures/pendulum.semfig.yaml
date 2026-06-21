@@ -1,0 +1,24 @@
+id: physics.pendulum.figure
+version: "1"
+domain: physics
+graphScope:
+  entityTypes: [Pendulum]
+root:
+  id: pendulum-root
+  kind: group
+  semantic:
+    domain: physics
+    entityType: Pendulum
+    entityId: "{{entityId}}"
+  role: diagram-root
+  children:
+    - id: body
+      kind: rect
+      semantic:
+        domain: physics
+        entityType: Pendulum
+        entityId: "{{entityId}}"
+        propertyPath: body
+      role: diagram-body
+      styleHint:
+        cssClass: diagram-body

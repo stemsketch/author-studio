@@ -1,0 +1,6 @@
+{
+  "version": "1",
+  "edition": "enterprise",
+  "authorApiBase": "http://127.0.0.1:4010",
+  "kitVersion": "1.0.0"
+}

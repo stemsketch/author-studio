@@ -1,0 +1,10 @@
+id: init-pendulum
+domain: physics
+description: Initialize pendulum state
+params:
+  length:
+    type: number
+    required: true
+  angle:
+    type: number
+    required: true

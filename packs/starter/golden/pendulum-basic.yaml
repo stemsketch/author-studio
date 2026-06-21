@@ -1,0 +1,10 @@
+id: pendulum-basic
+label: Pendulum basic golden
+viewId: physics.pendulum-2d
+initialEntities:
+  - id: p1
+    type: Pendulum
+    attributes:
+      length: 1.2
+      angleDeg: 30
+steps: []

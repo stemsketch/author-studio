@@ -1,6 +1,0 @@
-node_modules/
-.stemsketch/cache/
-*.pem
-*.key
-.env
-.DS_Store

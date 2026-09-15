@@ -2,17 +2,17 @@
 
 VS Code extension and author-facing IDE integration for STEMSketch.
 
-This client uses local libraries for fast deterministic operations and talks to `author-services` for networked, privileged, collaborative, AI-backed, catalog, or compute-heavy work.
+This client uses local IR validators for fast deterministic diagnostics and talks to `author-services` for compile jobs. Preview shows the last compile result. Connection status is a status bar item. Author Services URL is configuration; session tokens use VS Code secret storage. Provider secrets are never shipped in the extension.
 
 It must not become a second compiler, embed backend secrets, or define canonical IR types. See [ADR-0001](https://github.com/stemsketch/stemsketch/blob/main/docs/adr/0001-stemsketch-greenfield-architecture.md).
 
 ## Status
 
-Phase 0 foundation only. Extension commands and preview land in Phase 16.
+Phase 16 Author Studio foundation is available as a VS Code extension. Linked IR packages expect a sibling `stemsketch-ir` checkout.
 
 ## Local development
 
-Requires Node.js 24.21+ and [pnpm](https://pnpm.io/) 11.
+Requires Node.js 24.21+, [pnpm](https://pnpm.io/) 11, and a sibling `stemsketch-ir` checkout.
 
 ```bash
 pnpm install

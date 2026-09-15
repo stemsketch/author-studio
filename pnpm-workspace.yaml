@@ -1,5 +1,5 @@
 packages:
-  - "packages/*"
+  - "../stemsketch-ir/packages/*"
 
 allowBuilds:
   esbuild: true

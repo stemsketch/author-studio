@@ -7,6 +7,31 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@stemsketch/artifact-ir':
+        specifier: workspace:*
+        version: link:../stemsketch-ir/packages/artifact-ir
+      '@stemsketch/graph':
+        specifier: workspace:*
+        version: link:../stemsketch-ir/packages/graph
+      '@stemsketch/knowledge-ir':
+        specifier: workspace:*
+        version: link:../stemsketch-ir/packages/knowledge-ir
+      '@stemsketch/layout-ir':
+        specifier: workspace:*
+        version: link:../stemsketch-ir/packages/layout-ir
+      '@stemsketch/scene-ir':
+        specifier: workspace:*
+        version: link:../stemsketch-ir/packages/scene-ir
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../stemsketch-ir/packages/schema
+      '@stemsketch/view-ir':
+        specifier: workspace:*
+        version: link:../stemsketch-ir/packages/view-ir
+      '@stemsketch/viewdeck-ir':
+        specifier: workspace:*
+        version: link:../stemsketch-ir/packages/viewdeck-ir
     devDependencies:
       '@eslint/js':
         specifier: ^9.35.0
@@ -14,6 +39,9 @@ importers:
       '@types/node':
         specifier: ^24.0.0
         version: 24.13.4
+      '@types/vscode':
+        specifier: ^1.96.0
+        version: 1.137.0
       eslint:
         specifier: ^9.35.0
         version: 9.39.5
@@ -32,6 +60,133 @@ importers:
       vitest:
         specifier: ^3.2.4
         version: 3.2.7(@types/node@24.13.4)
+
+  ../stemsketch-ir/packages/artifact-ir:
+    dependencies:
+      '@stemsketch/graph':
+        specifier: workspace:*
+        version: link:../graph
+      '@stemsketch/knowledge-ir':
+        specifier: workspace:*
+        version: link:../knowledge-ir
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+
+  ../stemsketch-ir/packages/blender-ir:
+    dependencies:
+      '@stemsketch/graph':
+        specifier: workspace:*
+        version: link:../graph
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+
+  ../stemsketch-ir/packages/canvas2d-ir:
+    dependencies:
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+
+  ../stemsketch-ir/packages/graph: {}
+
+  ../stemsketch-ir/packages/knowledge-ir:
+    dependencies:
+      '@stemsketch/graph':
+        specifier: workspace:*
+        version: link:../graph
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+
+  ../stemsketch-ir/packages/krita-ir:
+    dependencies:
+      '@stemsketch/graph':
+        specifier: workspace:*
+        version: link:../graph
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+
+  ../stemsketch-ir/packages/layout-ir:
+    dependencies:
+      '@stemsketch/graph':
+        specifier: workspace:*
+        version: link:../graph
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+
+  ../stemsketch-ir/packages/migrations:
+    dependencies:
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+
+  ../stemsketch-ir/packages/scene-ir:
+    dependencies:
+      '@stemsketch/artifact-ir':
+        specifier: workspace:*
+        version: link:../artifact-ir
+      '@stemsketch/graph':
+        specifier: workspace:*
+        version: link:../graph
+      '@stemsketch/layout-ir':
+        specifier: workspace:*
+        version: link:../layout-ir
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+
+  ../stemsketch-ir/packages/schema: {}
+
+  ../stemsketch-ir/packages/svg-ir:
+    dependencies:
+      '@stemsketch/graph':
+        specifier: workspace:*
+        version: link:../graph
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+
+  ../stemsketch-ir/packages/transition-ir:
+    dependencies:
+      '@stemsketch/graph':
+        specifier: workspace:*
+        version: link:../graph
+      '@stemsketch/layout-ir':
+        specifier: workspace:*
+        version: link:../layout-ir
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+
+  ../stemsketch-ir/packages/view-ir:
+    dependencies:
+      '@stemsketch/artifact-ir':
+        specifier: workspace:*
+        version: link:../artifact-ir
+      '@stemsketch/graph':
+        specifier: workspace:*
+        version: link:../graph
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+
+  ../stemsketch-ir/packages/viewdeck-ir:
+    dependencies:
+      '@stemsketch/artifact-ir':
+        specifier: workspace:*
+        version: link:../artifact-ir
+      '@stemsketch/graph':
+        specifier: workspace:*
+        version: link:../graph
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+      '@stemsketch/view-ir':
+        specifier: workspace:*
+        version: link:../view-ir
 
 packages:
 
@@ -411,6 +566,9 @@ packages:
 
   '@types/node@24.13.4':
     resolution: {integrity: sha512-YJ7EqCstVTzIr0fMr7qul/977en+pQHrfmuKIo6Zr9i75Be21dr3MovcfvGtyvi2HAUrRerWps5sMO9I7WaxDw==}
+
+  '@types/vscode@1.137.0':
+    resolution: {integrity: sha512-0dc/BBWxkyUsJzXIZ7PkKSalThmS4xiBT+8YEDiWdCefRKHGVV5ZNkM5NB5ULYamallYJujIfncNoXWFlyzL8A==}
 
   '@typescript-eslint/eslint-plugin@8.70.0':
     resolution: {integrity: sha512-/v8HZt6RlyIZxB3ntehELOcUcfxKPVGWXnQdJuHRmzrqgF8nQypcC/oxGW+Ot4VGKDq81XugPKxx0n5PBtf9PA==}
@@ -1269,6 +1427,8 @@ snapshots:
   '@types/node@24.13.4':
     dependencies:
       undici-types: 7.18.2
+
+  '@types/vscode@1.137.0': {}
 
   '@typescript-eslint/eslint-plugin@8.70.0(@typescript-eslint/parser@8.70.0(eslint@9.39.5)(typescript@5.9.3))(eslint@9.39.5)(typescript@5.9.3)':
     dependencies:

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stemsketch.dev/schema/stemsketch-document.json",
+  "title": "STEMSketch IR document",
+  "type": "object",
+  "required": ["kind", "version"],
+  "properties": {
+    "kind": {
+      "type": "string",
+      "pattern": "^stemsketch\\."
+    },
+    "version": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array"
+    },
+    "edges": {
+      "type": "array"
+    }
+  }
+}

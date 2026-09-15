@@ -1,23 +1,91 @@
 {
   "name": "@stemsketch/author-studio",
+  "displayName": "STEMSketch Author Studio",
+  "description": "VS Code authoring client for STEMSketch IR documents.",
   "version": "0.0.0",
   "private": true,
+  "publisher": "stemsketch",
   "type": "module",
   "packageManager": "pnpm@11.1.1",
   "engines": {
-    "node": ">=24.21.0"
+    "node": ">=24.21.0",
+    "vscode": "^1.96.0"
+  },
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "workspaceContains:**/.stemsketch",
+    "workspaceContains:**/*.stemsketch.json",
+    "onCommand:stemsketch.validate",
+    "onCommand:stemsketch.compile",
+    "onCommand:stemsketch.preview"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "stemsketch.validate",
+        "title": "STEMSketch: Validate"
+      },
+      {
+        "command": "stemsketch.compile",
+        "title": "STEMSketch: Compile"
+      },
+      {
+        "command": "stemsketch.preview",
+        "title": "STEMSketch: Preview"
+      },
+      {
+        "command": "stemsketch.gotoNode",
+        "title": "STEMSketch: Go to Graph Node"
+      },
+      {
+        "command": "stemsketch.connect",
+        "title": "STEMSketch: Connect Author Services"
+      }
+    ],
+    "jsonValidation": [
+      {
+        "fileMatch": [
+          "*.stemsketch.json",
+          "/.stemsketch/*.json",
+          "stemsketch.json"
+        ],
+        "url": "./schemas/stemsketch-document.schema.json"
+      }
+    ],
+    "configuration": {
+      "title": "STEMSketch Author Studio",
+      "properties": {
+        "stemsketch.authorServices.url": {
+          "type": "string",
+          "default": "http://127.0.0.1:8787",
+          "description": "Author Services base URL. Do not store provider secrets here."
+        }
+      }
+    }
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build:deps": "tsc -p ../stemsketch-ir/packages/graph/tsconfig.json && tsc -p ../stemsketch-ir/packages/schema/tsconfig.json && tsc -p ../stemsketch-ir/packages/knowledge-ir/tsconfig.json && tsc -p ../stemsketch-ir/packages/artifact-ir/tsconfig.json && tsc -p ../stemsketch-ir/packages/layout-ir/tsconfig.json && tsc -p ../stemsketch-ir/packages/scene-ir/tsconfig.json && tsc -p ../stemsketch-ir/packages/view-ir/tsconfig.json && tsc -p ../stemsketch-ir/packages/viewdeck-ir/tsconfig.json",
+    "build": "pnpm build:deps && tsc -p tsconfig.json",
     "test": "vitest run",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "pnpm build:deps && tsc -p tsconfig.json --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format-check": "prettier --check ."
   },
+  "dependencies": {
+    "@stemsketch/artifact-ir": "workspace:*",
+    "@stemsketch/graph": "workspace:*",
+    "@stemsketch/knowledge-ir": "workspace:*",
+    "@stemsketch/layout-ir": "workspace:*",
+    "@stemsketch/scene-ir": "workspace:*",
+    "@stemsketch/schema": "workspace:*",
+    "@stemsketch/view-ir": "workspace:*",
+    "@stemsketch/viewdeck-ir": "workspace:*"
+  },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
     "@types/node": "^24.0.0",
+    "@types/vscode": "^1.96.0",
     "eslint": "^9.35.0",
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.6.2",

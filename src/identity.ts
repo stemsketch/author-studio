@@ -11,6 +11,9 @@ export const COMMANDS = {
   preview: "stemsketch.preview",
   gotoNode: "stemsketch.gotoNode",
   connect: "stemsketch.connect",
+  aiGenerate: "stemsketch.ai.generate",
+  aiRepair: "stemsketch.ai.repair",
+  aiExplain: "stemsketch.ai.explain",
 } as const;
 
 export type StudioCommand = (typeof COMMANDS)[keyof typeof COMMANDS];

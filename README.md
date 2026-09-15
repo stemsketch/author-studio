@@ -8,7 +8,7 @@ It must not become a second compiler, embed backend secrets, or define canonical
 
 ## Status
 
-Phase 16 Author Studio foundation is available as a VS Code extension. Linked IR packages expect a sibling `stemsketch-ir` checkout.
+Phase 17 AI authoring commands generate, repair, and explain IR through Author Services. All AI documents are validated before compile/preview. Linked IR packages expect a sibling `stemsketch-ir` checkout.
 
 ## Local development
 

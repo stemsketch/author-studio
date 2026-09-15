@@ -32,6 +32,17 @@ export class AuthorServicesClient {
     return this.get(`/api/v1/jobs/${jobId}`);
   }
 
+  async workflow(body: Record<string, unknown>): Promise<{
+    accepted: boolean;
+    diagnostics: unknown[];
+    document?: unknown;
+    text?: string;
+    results?: unknown[];
+    compile?: CompileJob;
+  }> {
+    return this.post("/api/v1/ai/workflows", body);
+  }
+
   private headers(): Record<string, string> {
     const headers: Record<string, string> = { "content-type": "application/json" };
     const token = this.options.getToken?.();

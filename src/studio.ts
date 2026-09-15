@@ -12,6 +12,15 @@ export class AuthorStudio {
   connection: ConnectionStatus = "disconnected";
   lastJob: CompileJob | undefined;
   lastDiagnostics: Diagnostic[] = [];
+  lastAi:
+    | {
+        accepted: boolean;
+        diagnostics: unknown[];
+        document?: unknown;
+        text?: string;
+        compile?: CompileJob;
+      }
+    | undefined;
 
   constructor(private readonly client: AuthorServicesClient) {}
 
@@ -107,6 +116,29 @@ export class AuthorStudio {
       };
     }
     return { ok: true, path: found.path, diagnostics: [] };
+  }
+
+  async runWorkflow(
+    workflow: string,
+    input: Record<string, unknown> = {},
+  ): Promise<NonNullable<AuthorStudio["lastAi"]>> {
+    const result = await this.client.workflow({ workflow, ...input });
+    this.lastAi = result;
+    if (result.compile) {
+      this.lastJob = result.compile;
+    }
+    if (result.accepted && result.document !== undefined) {
+      const serialized = JSON.stringify(result.document);
+      const local = this.validate(serialized);
+      if (!local.ok) {
+        this.lastAi = {
+          accepted: false,
+          diagnostics: local.diagnostics,
+        };
+        return this.lastAi;
+      }
+    }
+    return result;
   }
 }
 

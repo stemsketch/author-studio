@@ -1,6 +1,7 @@
 import type { Diagnostic as IrDiagnostic } from "@stemsketch/schema";
 
 import { COMMANDS } from "./identity.js";
+import { parseJsonDocument } from "./document.js";
 import { AuthorStudio, connectionLabel } from "./studio.js";
 import { isStemsketchWorkspace } from "./workspace.js";
 
@@ -205,6 +206,57 @@ export function registerAuthorStudio(
       }
       await api.window.showInformationMessage(`Located ${nodeId} at ${found.path}`);
       return found;
+    }),
+    api.commands.registerCommand(COMMANDS.aiGenerate, async () => {
+      const intent = await api.window.showInputBox({ prompt: "Describe the IR to generate" });
+      if (!intent) {
+        return;
+      }
+      const result = await studio.runWorkflow("generate", { intent, compile: true });
+      if (!result.accepted) {
+        await api.window.showErrorMessage("AI output was rejected until it validates");
+        return result;
+      }
+      const preview = studio.preview();
+      if (preview.ok && api.window.createWebviewPanel && api.ViewColumn) {
+        const panel = api.window.createWebviewPanel(
+          "stemsketch.preview",
+          "STEMSketch Preview",
+          api.ViewColumn.Beside,
+          { enableScripts: false },
+        );
+        panel.webview.html = previewHtml(preview.body);
+      }
+      await api.window.showInformationMessage("AI artifact validated, compiled, and previewed");
+      return result;
+    }),
+    api.commands.registerCommand(COMMANDS.aiRepair, async () => {
+      const current = await requireDocument();
+      if (!current) {
+        return;
+      }
+      const parsed = parseJsonDocument(current.text);
+      if (!parsed.ok) {
+        await api.window.showErrorMessage(parsed.diagnostics[0]?.message ?? "invalid JSON");
+        return parsed;
+      }
+      const result = await studio.runWorkflow("repair", {
+        intent: "repair",
+        document: parsed.value,
+        compile: true,
+      });
+      if (!result.accepted) {
+        await api.window.showErrorMessage("Repaired IR was still invalid");
+        return result;
+      }
+      await api.window.showInformationMessage("Repaired IR validated");
+      return result;
+    }),
+    api.commands.registerCommand(COMMANDS.aiExplain, async () => {
+      const intent = studio.lastDiagnostics[0]?.code ?? "diagnostic";
+      const result = await studio.runWorkflow("explain", { intent });
+      await api.window.showInformationMessage(result.text ?? "No explanation");
+      return result;
     }),
   );
 

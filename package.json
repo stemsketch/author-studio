@@ -40,6 +40,18 @@
       {
         "command": "stemsketch.connect",
         "title": "STEMSketch: Connect Author Services"
+      },
+      {
+        "command": "stemsketch.ai.generate",
+        "title": "STEMSketch: Generate IR"
+      },
+      {
+        "command": "stemsketch.ai.repair",
+        "title": "STEMSketch: Repair IR"
+      },
+      {
+        "command": "stemsketch.ai.explain",
+        "title": "STEMSketch: Explain Diagnostic"
       }
     ],
     "jsonValidation": [

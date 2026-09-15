@@ -59,6 +59,31 @@ function mockClient(
       if (url.endsWith("/api/v1/health")) {
         return jsonResponse({ status: "ok" });
       }
+      if (url.endsWith("/api/v1/ai/workflows")) {
+        const payload =
+          typeof init?.body === "string"
+            ? (JSON.parse(init.body) as { workflow?: string; intent?: string })
+            : {};
+        if (payload.workflow === "generate" && payload.intent?.includes("corrupt")) {
+          return jsonResponse({
+            accepted: false,
+            diagnostics: [{ code: "SERVICE_AI_REJECTED", message: "invalid IR" }],
+          });
+        }
+        if (payload.workflow === "explain") {
+          return jsonResponse({
+            accepted: true,
+            diagnostics: [],
+            text: `diagnostic:${payload.intent}`,
+          });
+        }
+        return jsonResponse({
+          accepted: true,
+          diagnostics: [],
+          document: JSON.parse(knowledgeText()),
+          compile: job,
+        });
+      }
       if (url.endsWith("/api/v1/compile")) {
         return jsonResponse({ jobId: job.id });
       }
@@ -210,9 +235,9 @@ describe("author studio foundation", () => {
     const studio = activateWith(api, fakeContext(), mockClient(calls));
     expect(commands.has(COMMANDS.validate)).toBe(true);
     expect(commands.has(COMMANDS.compile)).toBe(true);
-    expect(commands.has(COMMANDS.preview)).toBe(true);
-
+    expect(commands.has(COMMANDS.aiGenerate)).toBe(true);
     await commands.get(COMMANDS.validate)?.();
+    await commands.get(COMMANDS.aiGenerate)?.();
     await commands.get(COMMANDS.compile)?.();
     await commands.get(COMMANDS.preview)?.();
     await commands.get(COMMANDS.gotoNode)?.();
@@ -230,5 +255,18 @@ describe("author studio foundation", () => {
     }
     const manifest = readFileSync(join(root, "package.json"), "utf8");
     expect(manifest.includes("STEMSKETCH_AI_API_KEY")).toBe(false);
+  });
+
+  it("generates IR through mocked AI, then rejects invalid output", async () => {
+    const calls: Array<{ url: string; body?: string; authorization?: string }> = [];
+    const studio = new AuthorStudio(mockClient(calls));
+    const generated = await studio.runWorkflow("generate", { intent: "projectile", compile: true });
+    expect(generated.accepted).toBe(true);
+    expect(studio.preview().ok).toBe(true);
+    expect(studio.preview().body).toContain("stemsketch.view");
+    const rejected = await studio.runWorkflow("generate", { intent: "corrupt please" });
+    expect(rejected.accepted).toBe(false);
+    const repaired = await studio.runWorkflow("repair", { intent: "repair", compile: true });
+    expect(repaired.accepted).toBe(true);
   });
 });

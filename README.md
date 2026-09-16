@@ -2,9 +2,9 @@
 
 VS Code extension and author-facing IDE integration for STEMSketch.
 
-This client uses local IR validators for fast deterministic diagnostics and talks to `author-services` for compile jobs. Preview shows the last compile result. Connection status is a status bar item. Author Services URL is configuration; session tokens use VS Code secret storage. Provider secrets are never shipped in the extension.
+This client uses local IR validators and Physics DSL language tooling (not VS Code-specific) for fast deterministic diagnostics, and talks to `author-services` for compile jobs. `.physics` files are first-class. Preview shows the last compile result. Connection status is a status bar item. Author Services URL is configuration; session tokens use VS Code secret storage. Provider secrets are never shipped in the extension.
 
-It must not become a second compiler, embed backend secrets, or define canonical IR types. See [ADR-0001](https://github.com/stemsketch/stemsketch/blob/main/docs/adr/0001-stemsketch-greenfield-architecture.md).
+It must not become a second compiler, embed backend secrets, or define canonical IR types. See [ADR-0001](https://github.com/stemsketch/stemsketch/blob/main/docs/adr/0001-stemsketch-greenfield-architecture.md) and [ADR-0002](https://github.com/stemsketch/stemsketch/blob/main/docs/adr/0002-canonical-semantic-identity-and-domain-dsls.md).
 
 ## Status
 

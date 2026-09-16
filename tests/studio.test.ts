@@ -11,7 +11,10 @@ import {
   AuthorStudio,
   COMMANDS,
   activateWith,
+  isPhysicsSource,
+  isStemsketchFileName,
   isStemsketchWorkspace,
+  physicsCompletions,
   repositoryId,
 } from "../src/index.js";
 import type { CompileJob } from "../src/client.js";
@@ -82,6 +85,13 @@ function mockClient(
           diagnostics: [],
           document: JSON.parse(knowledgeText()),
           compile: job,
+        });
+      }
+      if (url.endsWith("/api/v1/dsl/compile")) {
+        return jsonResponse({
+          ok: true,
+          diagnostics: [],
+          result: { view: { kind: "stemsketch.view", title: "Physics" }, svg: "<svg/>" },
         });
       }
       if (url.endsWith("/api/v1/compile")) {
@@ -186,6 +196,9 @@ describe("author studio foundation", () => {
   it("recognizes a STEMSketch workspace and contributed commands", () => {
     expect(repositoryId).toBe("author-studio");
     expect(isStemsketchWorkspace([".stemsketch", "README.md"])).toBe(true);
+    expect(isStemsketchFileName("models/projectile.physics")).toBe(true);
+    expect(isPhysicsSource("physics 0.1\nframe world { type: inertial }")).toBe(true);
+    expect(physicsCompletions("sim")).toContain("simulate");
     const manifest = JSON.parse(readFileSync(join(root, "package.json"), "utf8")) as {
       contributes: { commands: Array<{ command: string }>; jsonValidation: unknown[] };
     };

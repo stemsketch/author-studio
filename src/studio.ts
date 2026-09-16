@@ -3,6 +3,7 @@ import { diagnostic } from "@stemsketch/schema";
 
 import type { AuthorServicesClient, CompileJob } from "./client.js";
 import { StudioCodes, findNodeIndex, parseJsonDocument } from "./document.js";
+import { isPhysicsSource, validatePhysicsLanguage } from "./language.js";
 import { toCompilationUnit, validateStemsketchText } from "./validate.js";
 import { isStemsketchWorkspace } from "./workspace.js";
 
@@ -29,7 +30,9 @@ export class AuthorStudio {
   }
 
   validate(text: string): { ok: boolean; diagnostics: Diagnostic[] } {
-    const result = validateStemsketchText(text);
+    const result = isPhysicsSource(text)
+      ? validatePhysicsLanguage(text)
+      : validateStemsketchText(text);
     this.lastDiagnostics = result.diagnostics;
     return result;
   }
@@ -45,6 +48,20 @@ export class AuthorStudio {
   }
 
   async compile(text: string): Promise<CompileJob> {
+    if (isPhysicsSource(text)) {
+      const compiled = await this.client.compileDsl(text);
+      const job: CompileJob = {
+        id: "job_physics_dsl",
+        status: compiled.ok ? "succeeded" : "failed",
+        compiled: compiled.ok,
+        validated: true,
+        diagnostics: compiled.diagnostics,
+        ...(compiled.result !== undefined ? { result: compiled.result } : {}),
+      };
+      this.lastJob = job;
+      this.lastDiagnostics = (compiled.diagnostics as Diagnostic[]) ?? [];
+      return job;
+    }
     const parsed = parseJsonDocument(text);
     if (!parsed.ok) {
       this.lastDiagnostics = parsed.diagnostics;

@@ -9,6 +9,7 @@ export function isStemsketchFileName(fileName: string): boolean {
   const normalized = fileName.replaceAll("\\", "/");
   return (
     normalized.endsWith(".stemsketch.json") ||
+    normalized.endsWith(".physics") ||
     normalized.includes("/.stemsketch/") ||
     normalized.endsWith("/stemsketch.json")
   );

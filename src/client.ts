@@ -28,6 +28,14 @@ export class AuthorServicesClient {
     return this.post("/api/v1/compile", { unit });
   }
 
+  async compileDsl(source: string): Promise<{
+    ok: boolean;
+    diagnostics: unknown[];
+    result?: unknown;
+  }> {
+    return this.post("/api/v1/dsl/compile", { language: "physics", source });
+  }
+
   async job(jobId: string): Promise<CompileJob> {
     return this.get(`/api/v1/jobs/${jobId}`);
   }

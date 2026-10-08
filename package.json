@@ -89,7 +89,7 @@
     }
   },
   "scripts": {
-    "build:deps": "tsc -p ../stemsketch-ir/packages/graph/tsconfig.json && tsc -p ../stemsketch-ir/packages/schema/tsconfig.json && tsc -p ../stemsketch-ir/packages/semantic-identity/tsconfig.json && tsc -p ../stemsketch-ir/packages/expression-ir/tsconfig.json && tsc -p ../stemsketch-ir/packages/knowledge-ir/tsconfig.json && tsc -p ../stemsketch-ir/packages/simulation-ir/tsconfig.json && tsc -p ../stemsketch-ir/packages/physics-ir/tsconfig.json && tsc -p ../stemsketch-ir/packages/artifact-ir/tsconfig.json && tsc -p ../stemsketch-ir/packages/layout-ir/tsconfig.json && tsc -p ../stemsketch-ir/packages/scene-ir/tsconfig.json && tsc -p ../stemsketch-ir/packages/view-ir/tsconfig.json && tsc -p ../stemsketch-ir/packages/viewdeck-ir/tsconfig.json && tsc -p ../stemsketch-ir/packages/transition-ir/tsconfig.json && tsc -p ../stemsketch-ir/packages/svg-ir/tsconfig.json && tsc -p ../stemsketch-compiler/packages/diagnostics/tsconfig.json && tsc -p ../stemsketch-compiler/packages/compiler-core/tsconfig.json && tsc -p ../stemsketch-compiler/packages/dsl-core/tsconfig.json && tsc -p ../stemsketch-compiler/packages/validator/tsconfig.json && tsc -p ../stemsketch-compiler/packages/normalizer/tsconfig.json && tsc -p ../stemsketch-compiler/packages/layout/tsconfig.json && tsc -p ../stemsketch-compiler/packages/transition/tsconfig.json && tsc -p ../stemsketch-compiler/packages/compiler-viewdeck/tsconfig.json && tsc -p ../stemsketch-compiler/packages/compiler-svg/tsconfig.json && tsc -p ../stemsketch-compiler/packages/compiler-physics/tsconfig.json",
+    "build:deps": "pnpm --dir ../stemsketch-ir build && pnpm --dir ../stemsketch-compiler build",
     "build": "pnpm build:deps && tsc -p tsconfig.json",
     "test": "vitest run",
     "typecheck": "pnpm build:deps && tsc -p tsconfig.json --noEmit",
@@ -100,11 +100,17 @@
   "dependencies": {
     "@stemsketch/artifact-ir": "workspace:*",
     "@stemsketch/compiler-physics": "workspace:*",
+    "@stemsketch/data-ir": "workspace:*",
     "@stemsketch/graph": "workspace:*",
     "@stemsketch/knowledge-ir": "workspace:*",
     "@stemsketch/layout-ir": "workspace:*",
+    "@stemsketch/physics-ir": "workspace:*",
+    "@stemsketch/presentation-timeline-ir": "workspace:*",
     "@stemsketch/scene-ir": "workspace:*",
     "@stemsketch/schema": "workspace:*",
+    "@stemsketch/simulation-ir": "workspace:*",
+    "@stemsketch/transition-ir": "workspace:*",
+    "@stemsketch/validator": "workspace:*",
     "@stemsketch/view-ir": "workspace:*",
     "@stemsketch/viewdeck-ir": "workspace:*"
   },

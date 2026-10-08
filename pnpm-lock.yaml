@@ -14,6 +14,9 @@ importers:
       '@stemsketch/compiler-physics':
         specifier: workspace:*
         version: link:../stemsketch-compiler/packages/compiler-physics
+      '@stemsketch/data-ir':
+        specifier: workspace:*
+        version: link:../stemsketch-ir/packages/data-ir
       '@stemsketch/graph':
         specifier: workspace:*
         version: link:../stemsketch-ir/packages/graph
@@ -23,12 +26,27 @@ importers:
       '@stemsketch/layout-ir':
         specifier: workspace:*
         version: link:../stemsketch-ir/packages/layout-ir
+      '@stemsketch/physics-ir':
+        specifier: workspace:*
+        version: link:../stemsketch-ir/packages/physics-ir
+      '@stemsketch/presentation-timeline-ir':
+        specifier: workspace:*
+        version: link:../stemsketch-ir/packages/presentation-timeline-ir
       '@stemsketch/scene-ir':
         specifier: workspace:*
         version: link:../stemsketch-ir/packages/scene-ir
       '@stemsketch/schema':
         specifier: workspace:*
         version: link:../stemsketch-ir/packages/schema
+      '@stemsketch/simulation-ir':
+        specifier: workspace:*
+        version: link:../stemsketch-ir/packages/simulation-ir
+      '@stemsketch/transition-ir':
+        specifier: workspace:*
+        version: link:../stemsketch-ir/packages/transition-ir
+      '@stemsketch/validator':
+        specifier: workspace:*
+        version: link:../stemsketch-compiler/packages/validator
       '@stemsketch/view-ir':
         specifier: workspace:*
         version: link:../stemsketch-ir/packages/view-ir
@@ -87,6 +105,9 @@ importers:
       '@stemsketch/layout-ir':
         specifier: workspace:*
         version: link:../../../stemsketch-ir/packages/layout-ir
+      '@stemsketch/scene-geometry':
+        specifier: workspace:*
+        version: link:../scene-geometry
       '@stemsketch/scene-ir':
         specifier: workspace:*
         version: link:../../../stemsketch-ir/packages/scene-ir
@@ -105,6 +126,9 @@ importers:
       '@stemsketch/layout-ir':
         specifier: workspace:*
         version: link:../../../stemsketch-ir/packages/layout-ir
+      '@stemsketch/scene-geometry':
+        specifier: workspace:*
+        version: link:../scene-geometry
       '@stemsketch/scene-ir':
         specifier: workspace:*
         version: link:../../../stemsketch-ir/packages/scene-ir
@@ -138,6 +162,9 @@ importers:
       '@stemsketch/layout-ir':
         specifier: workspace:*
         version: link:../../../stemsketch-ir/packages/layout-ir
+      '@stemsketch/scene-geometry':
+        specifier: workspace:*
+        version: link:../scene-geometry
       '@stemsketch/scene-ir':
         specifier: workspace:*
         version: link:../../../stemsketch-ir/packages/scene-ir
@@ -156,24 +183,39 @@ importers:
       '@stemsketch/compiler-svg':
         specifier: workspace:*
         version: link:../compiler-svg
+      '@stemsketch/data-ir':
+        specifier: workspace:*
+        version: link:../../../stemsketch-ir/packages/data-ir
       '@stemsketch/diagnostics':
         specifier: workspace:*
         version: link:../diagnostics
+      '@stemsketch/domain-core':
+        specifier: workspace:*
+        version: link:../../../stemsketch-ir/packages/domain-core
       '@stemsketch/dsl-core':
         specifier: workspace:*
         version: link:../dsl-core
+      '@stemsketch/knowledge-ir':
+        specifier: workspace:*
+        version: link:../../../stemsketch-ir/packages/knowledge-ir
       '@stemsketch/layout-ir':
         specifier: workspace:*
         version: link:../../../stemsketch-ir/packages/layout-ir
       '@stemsketch/physics-ir':
         specifier: workspace:*
         version: link:../../../stemsketch-ir/packages/physics-ir
+      '@stemsketch/scene-geometry':
+        specifier: workspace:*
+        version: link:../scene-geometry
       '@stemsketch/scene-ir':
         specifier: workspace:*
         version: link:../../../stemsketch-ir/packages/scene-ir
       '@stemsketch/schema':
         specifier: workspace:*
         version: link:../../../stemsketch-ir/packages/schema
+      '@stemsketch/scientific-value':
+        specifier: workspace:*
+        version: link:../../../stemsketch-ir/packages/scientific-value
       '@stemsketch/semantic-identity':
         specifier: workspace:*
         version: link:../../../stemsketch-ir/packages/semantic-identity
@@ -204,6 +246,9 @@ importers:
       '@stemsketch/layout-ir':
         specifier: workspace:*
         version: link:../../../stemsketch-ir/packages/layout-ir
+      '@stemsketch/scene-geometry':
+        specifier: workspace:*
+        version: link:../scene-geometry
       '@stemsketch/scene-ir':
         specifier: workspace:*
         version: link:../../../stemsketch-ir/packages/scene-ir
@@ -228,6 +273,9 @@ importers:
       '@stemsketch/diagnostics':
         specifier: workspace:*
         version: link:../diagnostics
+      '@stemsketch/domain-core':
+        specifier: workspace:*
+        version: link:../../../stemsketch-ir/packages/domain-core
       '@stemsketch/knowledge-ir':
         specifier: workspace:*
         version: link:../../../stemsketch-ir/packages/knowledge-ir
@@ -273,6 +321,9 @@ importers:
 
   ../stemsketch-compiler/packages/layout:
     dependencies:
+      '@stemsketch/artifact-ir':
+        specifier: workspace:*
+        version: link:../../../stemsketch-ir/packages/artifact-ir
       '@stemsketch/compiler-core':
         specifier: workspace:*
         version: link:../compiler-core
@@ -313,6 +364,12 @@ importers:
         specifier: workspace:*
         version: link:../diagnostics
 
+  ../stemsketch-compiler/packages/scene-geometry:
+    dependencies:
+      '@stemsketch/scene-ir':
+        specifier: workspace:*
+        version: link:../../../stemsketch-ir/packages/scene-ir
+
   ../stemsketch-compiler/packages/transition:
     dependencies:
       '@stemsketch/diagnostics':
@@ -336,6 +393,9 @@ importers:
       '@stemsketch/layout-ir':
         specifier: workspace:*
         version: link:../../../stemsketch-ir/packages/layout-ir
+      '@stemsketch/presentation-timeline-ir':
+        specifier: workspace:*
+        version: link:../../../stemsketch-ir/packages/presentation-timeline-ir
       '@stemsketch/scene-ir':
         specifier: workspace:*
         version: link:../../../stemsketch-ir/packages/scene-ir
@@ -349,17 +409,56 @@ importers:
         specifier: workspace:*
         version: link:../../../stemsketch-ir/packages/viewdeck-ir
 
-  ../stemsketch-ir/packages/artifact-ir:
+  ../stemsketch-ir/packages/analysis-ir:
     dependencies:
-      '@stemsketch/graph':
+      '@stemsketch/data-ir':
         specifier: workspace:*
-        version: link:../graph
-      '@stemsketch/knowledge-ir':
+        version: link:../data-ir
+      '@stemsketch/domain-core':
         specifier: workspace:*
-        version: link:../knowledge-ir
+        version: link:../domain-core
+      '@stemsketch/expression-ir':
+        specifier: workspace:*
+        version: link:../expression-ir
       '@stemsketch/schema':
         specifier: workspace:*
         version: link:../schema
+      '@stemsketch/scientific-value':
+        specifier: workspace:*
+        version: link:../scientific-value
+      '@stemsketch/semantic-identity':
+        specifier: workspace:*
+        version: link:../semantic-identity
+
+  ../stemsketch-ir/packages/artifact-ir:
+    dependencies:
+      '@stemsketch/domain-core':
+        specifier: workspace:*
+        version: link:../domain-core
+      '@stemsketch/expression-ir':
+        specifier: workspace:*
+        version: link:../expression-ir
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+      '@stemsketch/scientific-value':
+        specifier: workspace:*
+        version: link:../scientific-value
+      '@stemsketch/semantic-identity':
+        specifier: workspace:*
+        version: link:../semantic-identity
+
+  ../stemsketch-ir/packages/biology-ir:
+    dependencies:
+      '@stemsketch/domain-core':
+        specifier: workspace:*
+        version: link:../domain-core
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+      '@stemsketch/scientific-value':
+        specifier: workspace:*
+        version: link:../scientific-value
 
   ../stemsketch-ir/packages/blender-ir:
     dependencies:
@@ -376,18 +475,91 @@ importers:
         specifier: workspace:*
         version: link:../schema
 
-  ../stemsketch-ir/packages/expression-ir: {}
+  ../stemsketch-ir/packages/chemistry-ir:
+    dependencies:
+      '@stemsketch/domain-core':
+        specifier: workspace:*
+        version: link:../domain-core
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+      '@stemsketch/scientific-value':
+        specifier: workspace:*
+        version: link:../scientific-value
+
+  ../stemsketch-ir/packages/circuit-ir:
+    dependencies:
+      '@stemsketch/domain-core':
+        specifier: workspace:*
+        version: link:../domain-core
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+      '@stemsketch/scientific-value':
+        specifier: workspace:*
+        version: link:../scientific-value
+
+  ../stemsketch-ir/packages/data-ir:
+    dependencies:
+      '@stemsketch/domain-core':
+        specifier: workspace:*
+        version: link:../domain-core
+      '@stemsketch/expression-ir':
+        specifier: workspace:*
+        version: link:../expression-ir
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+      '@stemsketch/scientific-value':
+        specifier: workspace:*
+        version: link:../scientific-value
+      '@stemsketch/semantic-identity':
+        specifier: workspace:*
+        version: link:../semantic-identity
+
+  ../stemsketch-ir/packages/domain-core:
+    dependencies:
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+      '@stemsketch/scientific-value':
+        specifier: workspace:*
+        version: link:../scientific-value
+      '@stemsketch/semantic-identity':
+        specifier: workspace:*
+        version: link:../semantic-identity
+
+  ../stemsketch-ir/packages/expression-ir:
+    dependencies:
+      '@stemsketch/domain-core':
+        specifier: workspace:*
+        version: link:../domain-core
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+      '@stemsketch/scientific-value':
+        specifier: workspace:*
+        version: link:../scientific-value
 
   ../stemsketch-ir/packages/graph: {}
 
   ../stemsketch-ir/packages/knowledge-ir:
     dependencies:
-      '@stemsketch/graph':
+      '@stemsketch/domain-core':
         specifier: workspace:*
-        version: link:../graph
+        version: link:../domain-core
+      '@stemsketch/expression-ir':
+        specifier: workspace:*
+        version: link:../expression-ir
       '@stemsketch/schema':
         specifier: workspace:*
         version: link:../schema
+      '@stemsketch/scientific-value':
+        specifier: workspace:*
+        version: link:../scientific-value
+      '@stemsketch/semantic-identity':
+        specifier: workspace:*
+        version: link:../semantic-identity
 
   ../stemsketch-ir/packages/krita-ir:
     dependencies:
@@ -400,9 +572,9 @@ importers:
 
   ../stemsketch-ir/packages/layout-ir:
     dependencies:
-      '@stemsketch/graph':
+      '@stemsketch/domain-core':
         specifier: workspace:*
-        version: link:../graph
+        version: link:../domain-core
       '@stemsketch/schema':
         specifier: workspace:*
         version: link:../schema
@@ -413,40 +585,52 @@ importers:
         specifier: workspace:*
         version: link:../schema
 
-  ../stemsketch-ir/packages/physics-ir:
+  ../stemsketch-ir/packages/model-ir:
     dependencies:
-      '@stemsketch/expression-ir':
+      '@stemsketch/domain-core':
         specifier: workspace:*
-        version: link:../expression-ir
-      '@stemsketch/graph':
-        specifier: workspace:*
-        version: link:../graph
+        version: link:../domain-core
       '@stemsketch/schema':
         specifier: workspace:*
         version: link:../schema
-      '@stemsketch/semantic-identity':
+      '@stemsketch/scientific-value':
         specifier: workspace:*
-        version: link:../semantic-identity
-      '@stemsketch/simulation-ir':
+        version: link:../scientific-value
+
+  ../stemsketch-ir/packages/physics-ir:
+    dependencies:
+      '@stemsketch/domain-core':
         specifier: workspace:*
-        version: link:../simulation-ir
+        version: link:../domain-core
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+      '@stemsketch/scientific-value':
+        specifier: workspace:*
+        version: link:../scientific-value
+
+  ../stemsketch-ir/packages/presentation-timeline-ir:
+    dependencies:
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
 
   ../stemsketch-ir/packages/scene-ir:
     dependencies:
-      '@stemsketch/artifact-ir':
+      '@stemsketch/domain-core':
         specifier: workspace:*
-        version: link:../artifact-ir
-      '@stemsketch/graph':
-        specifier: workspace:*
-        version: link:../graph
-      '@stemsketch/layout-ir':
-        specifier: workspace:*
-        version: link:../layout-ir
+        version: link:../domain-core
       '@stemsketch/schema':
         specifier: workspace:*
         version: link:../schema
 
   ../stemsketch-ir/packages/schema: {}
+
+  ../stemsketch-ir/packages/scientific-value:
+    dependencies:
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
 
   ../stemsketch-ir/packages/semantic-identity:
     dependencies:
@@ -456,12 +640,24 @@ importers:
 
   ../stemsketch-ir/packages/simulation-ir:
     dependencies:
-      '@stemsketch/graph':
+      '@stemsketch/data-ir':
         specifier: workspace:*
-        version: link:../graph
+        version: link:../data-ir
+      '@stemsketch/domain-core':
+        specifier: workspace:*
+        version: link:../domain-core
+      '@stemsketch/expression-ir':
+        specifier: workspace:*
+        version: link:../expression-ir
       '@stemsketch/schema':
         specifier: workspace:*
         version: link:../schema
+      '@stemsketch/scientific-value':
+        specifier: workspace:*
+        version: link:../scientific-value
+      '@stemsketch/semantic-identity':
+        specifier: workspace:*
+        version: link:../semantic-identity
 
   ../stemsketch-ir/packages/svg-ir:
     dependencies:
@@ -472,38 +668,41 @@ importers:
         specifier: workspace:*
         version: link:../schema
 
+  ../stemsketch-ir/packages/transformation-ir:
+    dependencies:
+      '@stemsketch/domain-core':
+        specifier: workspace:*
+        version: link:../domain-core
+      '@stemsketch/schema':
+        specifier: workspace:*
+        version: link:../schema
+
   ../stemsketch-ir/packages/transition-ir:
     dependencies:
-      '@stemsketch/graph':
+      '@stemsketch/domain-core':
         specifier: workspace:*
-        version: link:../graph
-      '@stemsketch/layout-ir':
-        specifier: workspace:*
-        version: link:../layout-ir
+        version: link:../domain-core
       '@stemsketch/schema':
         specifier: workspace:*
         version: link:../schema
 
   ../stemsketch-ir/packages/view-ir:
     dependencies:
-      '@stemsketch/artifact-ir':
+      '@stemsketch/domain-core':
         specifier: workspace:*
-        version: link:../artifact-ir
-      '@stemsketch/graph':
+        version: link:../domain-core
+      '@stemsketch/scene-ir':
         specifier: workspace:*
-        version: link:../graph
+        version: link:../scene-ir
       '@stemsketch/schema':
         specifier: workspace:*
         version: link:../schema
+      '@stemsketch/semantic-identity':
+        specifier: workspace:*
+        version: link:../semantic-identity
 
   ../stemsketch-ir/packages/viewdeck-ir:
     dependencies:
-      '@stemsketch/artifact-ir':
-        specifier: workspace:*
-        version: link:../artifact-ir
-      '@stemsketch/graph':
-        specifier: workspace:*
-        version: link:../graph
       '@stemsketch/schema':
         specifier: workspace:*
         version: link:../schema

@@ -8,11 +8,11 @@ It must not become a second compiler, embed backend secrets, or define canonical
 
 ## Status
 
-Phase 17 AI authoring commands generate, repair, and explain IR through Author Services. All AI documents are validated before compile/preview. Linked IR packages expect a sibling `stemsketch-ir` checkout.
+Phase 17 AI authoring commands generate, repair, and explain IR through Author Services. All AI documents are validated before compile/preview. Linked packages expect sibling `stemsketch-ir` and `stemsketch-compiler` checkouts. The studio checks documents with the IR package that owns each kind and with the compiler repository's `validator` for whole compilation units; it contains no validation rules of its own.
 
 ## Local development
 
-Requires Node.js 24.21+, [pnpm](https://pnpm.io/) 11, and a sibling `stemsketch-ir` checkout.
+Requires Node.js 24.21+, [pnpm](https://pnpm.io/) 11, and sibling `stemsketch-ir` and `stemsketch-compiler` checkouts.
 
 ```bash
 pnpm install

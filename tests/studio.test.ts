@@ -219,15 +219,15 @@ describe("author studio foundation", () => {
     const broken = studio.validate(
       JSON.stringify({
         kind: "stemsketch.knowledge",
-        version: "0.1.0",
-        edges: [],
-        nodes: [{ id: "bad", kind: "knowledge.unknown", version: "0.1.0" }],
+        version: "0.2.0",
+        id: "knowledge.bad",
+        nodes: [{ id: "bad", kind: "knowledge.unknown", version: "0.2.0" }],
       }),
     );
     expect(broken.ok).toBe(false);
-    expect(
-      broken.diagnostics.some((issue) => issue.code === KnowledgeCodes.KNOWLEDGE_INVALID_KIND),
-    ).toBe(true);
+    expect(broken.diagnostics.some((issue) => issue.code === KnowledgeCodes.KN_INVALID_NODE)).toBe(
+      true,
+    );
 
     expect(await studio.connect()).toBe("connected");
     const job = await studio.compile(text);
@@ -281,5 +281,76 @@ describe("author studio foundation", () => {
     expect(rejected.accepted).toBe(false);
     const repaired = await studio.runWorkflow("repair", { intent: "repair", compile: true });
     expect(repaired.accepted).toBe(true);
+  });
+
+  it("checks every canonical document kind with the IR package that owns it", () => {
+    const cases: Array<[string, string]> = [
+      ["knowledge-ir/examples/projectile-knowledge.json", "stemsketch.knowledge"],
+      ["artifact-ir/examples/projectile-artifacts.json", "stemsketch.artifact"],
+      ["layout-ir/examples/projectile-fbd-layout.json", "stemsketch.layout"],
+      ["scene-ir/examples/projectile-fbd-scene.json", "stemsketch.scene"],
+      ["view-ir/examples/projectile-fbd-view.json", "stemsketch.view"],
+      ["viewdeck-ir/examples/projectile-viewdeck.json", "stemsketch.viewdeck"],
+      ["transition-ir/examples/identity-transition.json", "stemsketch.transition"],
+      ["physics-ir/examples/projectile-physics.json", "stemsketch.physics"],
+    ];
+    const studio = new AuthorStudio(mockClient([]));
+    for (const [path, kind] of cases) {
+      const text = JSON.stringify(readJson(path));
+      const result = studio.validate(text);
+      expect(
+        result.diagnostics.filter((issue) => issue.severity === "error"),
+        kind,
+      ).toEqual([]);
+      expect(result.ok, kind).toBe(true);
+    }
+    const timeline = {
+      kind: "stemsketch.presentation-timeline",
+      version: "0.1.0",
+      id: "timeline.t",
+      view: "view.v",
+      durationMs: 1000,
+      cameras: [],
+      variables: [],
+      tracks: [],
+      actions: [
+        {
+          id: "a",
+          effect: "fade-in",
+          target: { kind: "presentation", ref: "p" },
+          startMs: 0,
+          durationMs: 500,
+        },
+      ],
+      groups: [],
+      bindings: [],
+      systemClips: [],
+    };
+    expect(studio.validate(JSON.stringify(timeline)).ok).toBe(true);
+    expect(
+      studio.validate(JSON.stringify({ ...timeline, actions: [{ id: "a", effect: "nope" }] })).ok,
+    ).toBe(false);
+    expect(studio.validate(JSON.stringify({ kind: "stemsketch.nonsense", version: "1" })).ok).toBe(
+      false,
+    );
+  });
+
+  it("validates a compilation unit as a whole, including ids shared between documents", () => {
+    const studio = new AuthorStudio(mockClient([]));
+    const unit = {
+      knowledge: readJson("knowledge-ir/examples/projectile-knowledge.json"),
+      artifacts: readJson("artifact-ir/examples/projectile-artifacts.json"),
+      layout: readJson("layout-ir/examples/projectile-fbd-layout.json"),
+      scene: readJson("scene-ir/examples/projectile-fbd-scene.json"),
+      view: readJson("view-ir/examples/projectile-fbd-view.json"),
+    };
+    expect(studio.validate(JSON.stringify(unit)).ok).toBe(true);
+    const clash = JSON.parse(JSON.stringify(unit)) as typeof unit & {
+      layout: { nodes: { id: string }[] };
+      scene: { nodes: { id: string }[] };
+    };
+    const first = clash.layout.nodes[0];
+    if (first) first.id = clash.scene.nodes[0]?.id ?? first.id;
+    expect(studio.validate(JSON.stringify(clash)).ok).toBe(false);
   });
 });
